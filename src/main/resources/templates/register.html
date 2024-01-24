@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #FFE53B;
+            background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 100%);
+        }
+    </style>
+</head>
+
+<body>
+<section class="vh-100 gradient-custom">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card bg-dark text-white" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+                            <form th:action="@{/register}" method="post" th:object="${user}">
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="username" th:field="*{username}" class="form-control form-control-lg" />
+                                    <label class="form-label" for="username">Login</label>
+                                    <small class="form-text text-danger" th:each="err : ${#fields.errors('username')}" th:text="${err}">Validation error</small>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="password" th:field="*{password}" class="form-control form-control-lg"/>
+                                    <label class="form-label" for="password">Password</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="repeatPassword" th:field="*{repeatPassword}" class="form-control form-control-lg" />
+                                    <label class="form-label" for="repeatPassword">Repeat your password</label>
+                                    <small class="form-text text-danger" th:each="err : ${#fields.errors('repeatPassword')}" th:text="${err}">Validation error</small>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-success btn-block btn-lg btn-warning gradient-custom-4 text-body">Register</button>
+                                </div>
+
+                                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="@{/login}" class="fw-bold text-white" ><u>Login here</u></a></p>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+</body>
+
+</html>
