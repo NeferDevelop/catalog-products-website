@@ -14,21 +14,27 @@
             background-color: #FFE53B;
             background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 100%);
         }
+
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning " style="background-color: transparent !important;">
 
     <div class="container">
-        <a class="navbar-brand text-dark font-weight-bold">Username</a>
+        <a class="navbar-brand text-dark font-weight-bold" th:text="${#authentication.principal.username}"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/login">Login</a>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <form th:action="@{/Login}" method="post">
+                        <button type="submit" class="nav-link text-dark" style="background: none; border: none;">Login</button>
+                    </form>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/logout">Logout</a>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="nav-link text-dark" style="background: none; border: none;">Logout</button>
+                    </form>
                 </li>
+
             </ul>
         </div>
     </div>
@@ -67,20 +73,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- Вставлены данные из вашего примера -->
                             <tr th:each = "product : ${products}">
 
-                                <!-- Чтобы поля заполнились соответствующими значениями прописываем параметр-->
                                 <th class="text-center" scope="row" th:text="${product.order_number}" th:utext="${product.order_number}"/>
-                                <td class="text-center" th:text="${product.name}"/>
+
+                                <td class="text-center">
+                                    <a class="text-center link-offset-2 link-underline link-underline-opacity-0" href="#" th:text="${product.name}" style="text-decoration: none; color: black;"/>
+                                </td>
+
                                 <td class="text-center" th:text="${product.price}"/>
                                 <td class="text-center d-flex justify-content-center">
-                                    <form th:action="@{/{product}(product = ${product.id})}" th:method = "edit" >
+                                    <form th:action="@{/edit/{id}(id = ${product.id})}" th:method = "get" >
                                         <button type="submit" class="btn btn-link">Edit</button>
                                     </form>
                                     <form th:action="@{/{product}(product = ${product.id})}" th:method = "delete">
                                         <button type="submit" class="btn btn-link">Delete</button>
-                                    </form><!--href должен ссылаться на определённый адрес-->
+                                    </form> <!-- href должен ссылаться на определённый адрес-->
                                 </td>
                             </tr>
                             </tbody>
@@ -102,7 +110,7 @@
                                 </div>
 
                                 <div style="margin-bottom: 10px" class="input-group d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button type="submit" class="btn btn-warning " style="width:60px;height:30px;" >Save</button>
+                                    <button type="submit" class="btn btn-warning " style="width:120px;height:40px;" >Save</button>
                                 </div>
 
                             </form>

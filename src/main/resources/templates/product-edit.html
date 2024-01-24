@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #FFE53B;
+            background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 100%);
+        }
+
+    }
+    </style>
+</head>
+
+<body>
+
+<!--Доработать редактировку кнопки Save-->
+<section class="vh-100 gradient-custom ">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3 ">
+        <div class="container h-100 ">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6 mx-auto" >
+                    <div class="card bg-dark text-white " style="border-radius: 15px;margin-left: -25%; margin-right: -25%;">
+                        <div class="card-body p-5 ">
+                            <h2 class="text-uppercase text-center mb-5">Editing a product</h2>
+
+                            <div class="row g-0">
+                                <!-- Place for the product image -->
+                                <div class="col-md-4">
+                                    <img src="https://s-media-cache-ak0.pinimg.com/236x/3b/36/ca/3b36ca3afe0fa0fd4984b9eee2e154bb.jpg" class="img-fluid rounded-start" alt="Product Image">
+                                </div>
+
+                                <div class="col-md-8" >
+
+                                    <form th:action="@{/edit}" th:method="post" th:object="${product}" class="p-4 ">
+
+                                        <div class="form-outline mb-4">
+                                            <input th:field="*{name}" placeholder="Product name" class="form-control form-control-lg"/>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input th:field="*{price}" placeholder="Price" class="form-control form-control-lg"/>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-success btn-block btn-lg btn-warning gradient-custom-4 text-body">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+</body>
+
+</html>
